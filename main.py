@@ -8,6 +8,39 @@ FILEDIR = Path(__file__).parent
 SRCDIR = FILEDIR / "src"
 
 
+class Short_option:
+    name: str
+    # www.gnu.org/software/libc/manual/html_node/Using-Getopt.html
+    is_noarg: bool              # X
+    is_required: bool           # X:
+    is_optional: bool           # X::
+    is_posix_compliant: bool    # +X
+    is_non_opts: bool           # -X
+
+    def __init__(self):
+        pass
+
+    def __init__(self, name: str,
+                 is_noarg: bool,
+                 is_required: bool,
+                 is_optional: bool,
+                 is_posix_compliant: bool,
+                 is_non_opts: bool,):
+        self.name = name
+        self.is_noarg = is_noarg
+        self.is_required = is_required
+        self.is_optional = is_optional
+        self.is_posix_compliant = is_posix_compliant
+        self.is_non_opts = is_non_opts
+
+        # Check for valid options
+        if (is_noarg and is_required or
+            is_required and is_optional or
+                is_noarg and is_optional or
+                is_posix_compliant and is_non_opts):
+            raise Exception("Invalid options")
+
+
 class Command:
     name: str
     short_opts: list[str]
@@ -59,8 +92,8 @@ def main():
                       for s in command.file_content[startIdx:] if s.endswith("};")), None)
 
         long_options = command.file_content[startIdx:endIdx]
-        # Parse long options
 
+        # Parse long options
         for str in long_options:
             words = str.strip().lstrip("{").rstrip("},").split(" ")
             if len(words) >= 0 and words[0].startswith("\""):
@@ -72,8 +105,15 @@ def main():
             elif len(words) >= 0 and words[0] == "GETOPT_SELINUX_CONTEXT_OPTION_DECL":
                 command.long_opts.append("context")
 
-
-
+        # Get short options
+        # Check if the short options located in the variable
+        if any(s.endswith("short_options[] =") for s in command.file_content):
+            # Get short options from file
+            idx = next((i for i, s in enumerate(command.file_content) if "short_options[]" in s), -1)
+            if idx < 0:
+                raise ("Unknown short options!")
+            
+            
 
 
 if __name__ == "__main__":
