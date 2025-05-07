@@ -1,0 +1,10 @@
+
+# cmake files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+
+
+# output
+optarg-parser
+*.json
