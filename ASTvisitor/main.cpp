@@ -29,6 +29,7 @@ public:
     initTypeMap();
   }
 
+  // Main visitor entry point
   void analyzeAll() {
     for (const auto &AST : ASTUnits) {
       Context = &AST->getASTContext();
@@ -36,6 +37,7 @@ public:
     }
   }
 
+  // function visitor
   bool VisitCallExpr(CallExpr *call) {
     auto *callee = call->getDirectCallee();
     if (!callee) {
@@ -43,10 +45,12 @@ public:
     }
 
     StringRef name = callee->getName();
-    if (call->getNumArgs() < 0) {
+    if (call->getNumArgs() <= 0) {
       return_visitor;
     }
 
+    // Main code of the function visitor (invoked only in one of the function
+    // argument is optarg)
     Expr *arg = call->getArg(0)->IgnoreParenImpCasts();
     if (DeclRefExpr *dre = dyn_cast<DeclRefExpr>(arg)) {
 
@@ -72,6 +76,7 @@ private:
   ASTContext *Context;
   std::map<std::string, std::string> FuncTypeMap;
 
+  // Main map of function-to-type conversions
   void initTypeMap() {
     FuncTypeMap = {{"atoi", "int"},
                    {"atol", "long"},
@@ -89,9 +94,11 @@ private:
                    {"sscanf", "mixed"},
                    {"memcpy", "raw"},
                    {"sprintf", "formatted string"},
-                   {"snprintf", "formatted string"}};
+                   {"snprintf", "formatted string"},
+                   {"strlen", "char *"}};
   }
 
+  // Trying to deduce type recursively
   std::string inferTypeRecursive(StringRef funcName,
                                  std::set<std::string> visited) {
     std::string fname = funcName.str();
@@ -105,21 +112,26 @@ private:
     for (const auto &AST : ASTUnits) {
       TranslationUnitDecl *tu = AST->getASTContext().getTranslationUnitDecl();
       for (auto *decl : tu->decls()) {
-        if (auto *fd = dyn_cast<FunctionDecl>(decl)) {
-          if (fd->getNameAsString() == fname && fd->hasBody()) {
-            std::set<std::string> resultTypes =
-                gatherTypesFromStmt(fd->getBody(), visited);
-            if (!resultTypes.empty()) {
-              std::string combined = "potential: ";
-              for (const std::string &t : resultTypes) {
-                combined += t + ", ";
-              }
-              combined.pop_back();
-              combined.pop_back();
-              return combined;
-            }
-          }
+        FunctionDecl *fd = dyn_cast<FunctionDecl>(decl);
+        if (!fd || !(fd->getNameAsString() == fname && fd->hasBody())) {
+          continue;
         }
+
+        // Trying to gather the types from gathered functions
+        std::set<std::string> resultTypes =
+            gatherTypesFromStmt(fd->getBody(), visited);
+
+        if (resultTypes.empty()) {
+          continue;
+        }
+
+        // return the potential types (if there are branching instructions)
+        std::string combined = "potential: ";
+        for (const std::string &t : resultTypes) {
+          combined += t + ", ";
+        }
+        combined = combined.substr(0, combined.size() - 2);
+        return combined;
       }
     }
     return "unknown";
@@ -135,6 +147,8 @@ private:
       if (!child)
         continue;
 
+      // If we encountered another function call - trying to parse this function
+      // call as well
       if (CallExpr *call = dyn_cast<CallExpr>(child)) {
         if (FunctionDecl *fd = call->getDirectCallee()) {
           std::string name = fd->getNameAsString();
@@ -163,7 +177,7 @@ int main(int argc, const char **argv) {
   ClangTool Tool(OptionsParser.getCompilations(),
                  OptionsParser.getSourcePathList());
 
-  // Trying to builds ASTs
+  // Trying to builds ASTs with built-in functions
   std::vector<std::unique_ptr<ASTUnit>> ASTs;
   if (Tool.buildASTs(ASTs) != 0) {
     llvm::errs() << "Failed to build ASTs\n";

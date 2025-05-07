@@ -6,13 +6,13 @@ find_package(Clang REQUIRED CONFIG)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Main section
-add_executable(find-class-decls main.cpp)
+add_executable(optarg-parser main.cpp)
 
 
 # Include clang libs
 # Include  /usr/lib/llvm-19/include/clang/ if you want to compile it manually
-target_include_directories(find-class-decls PRIVATE ${CLANG_INCLUDE_DIRS})
-target_link_libraries(find-class-decls
+target_include_directories(optarg-parser PRIVATE ${CLANG_INCLUDE_DIRS})
+target_link_libraries(optarg-parser
   PRIVATE
   clangAST
   clangBasic
