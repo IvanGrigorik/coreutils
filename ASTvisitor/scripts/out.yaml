@@ -7,23 +7,33 @@ basenc.c:
         function: quote
         type: char *
 chown.c:
-    - 'Å':
+    - 'FROM_OPTION':
         function: parse_user_spec_warn
         type: char *
-    - 'Å':
+    - 'FROM_OPTION':
         function: quote
         type: char *
-    - 'Å':
+    - 'FROM_OPTION':
         function: quote
         type: char *
 comm.c:
-    - 'Ç':
+    - 'OUTPUT_DELIMITER_OPTION':
+        function: strcmp
+        type: unknown
+    - 'OUTPUT_DELIMITER_OPTION':
         function: strlen
         type: char *
 cut.c:
-    - 'Ä':
+    - 'OUTPUT_DELIMITER_OPTION':
         function: strlen
         type: char *
+date.c:
+    - 'RFC_3339_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'I':
+        function: XARGMATCH
+        type: unknown
 du.c:
     - 'd':
         function: quote
@@ -34,6 +44,15 @@ du.c:
     - 't':
         function: xstrtoimax
         type: long
+    - 't':
+        function: xstrtol_fatal
+        type: unknown
+    - 'B':
+        function: xstrtol_fatal
+        type: unknown
+    - 'TIME_OPTION':
+        function: XARGMATCH
+        type: unknown
 expand.c:
     - 't':
         function: parse_tab_stops
@@ -43,7 +62,7 @@ fold.c:
         function: xnumtoumax
         type: unsigned long
 install.c:
-    - 'Ç':
+    - 'STRIP_PROGRAM_OPTION':
         function: xstrdup
         type: unknown
 kill.c:
@@ -55,6 +74,10 @@ kill.c:
         type: char *
     - '0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,n,s':
         function: operand2sig
+        type: unknown
+mv.c:
+    - 'u':
+        function: XARGMATCH
         type: unknown
 nl.c:
     - 'p':
@@ -112,44 +135,65 @@ nl.c:
         function: strlen
         type: char *
 nproc.c:
-    - 'Å':
+    - 'IGNORE_OPTION':
         function: xnumtoumax
         type: unsigned long
 numfmt.c:
-    - 'Å':
+    - 'FROM_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'FROM_UNIT_OPTION':
         function: unit_to_umax
         type: 
         - char *
         - raw
         - unknown
-    - 'É':
+    - 'TO_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'TO_UNIT_OPTION':
         function: unit_to_umax
         type: 
         - char *
         - raw
         - unknown
-    - 'á':
+    - 'ROUND_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'PADDING_OPTION':
         function: quote
         type: char *
-    - 'á':
+    - 'PADDING_OPTION':
         function: quote
         type: char *
-    - 'à':
+    - 'FIELD_OPTION':
         function: set_fields
         type: unknown
-    - 'ã':
+    - 'HEADER_OPTION':
         function: quote
         type: char *
-    - 'ã':
+    - 'HEADER_OPTION':
         function: quote
         type: char *
+    - 'INVALID_OPTION':
+        function: XARGMATCH
+        type: unknown
 rm.c:
-    - 'É':
+    - 'INTERACTIVE_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'PRESERVE_ROOT':
         function: strcmp
         type: unknown
 shred.c:
     - 'n':
         function: xdectoumax
+        type: unknown
+    - 'RANDOM_SOURCE_OPTION':
+        function: strcmp
+        type: unknown
+    - 'u':
+        function: XARGMATCH
         type: unknown
     - 's':
         function: xnumtoumax
@@ -161,14 +205,27 @@ shuf.c:
     - 'n':
         function: quote
         type: char *
+    - 'o':
+        function: strcmp
+        type: unknown
+    - 'RANDOM_SOURCE_OPTION':
+        function: strcmp
+        type: unknown
+stat.c:
+    - ':
+        function: XARGMATCH
+        type: unknown
 tail.c:
     - 'c,n':
         function: xnumtoumax
         type: unsigned long
-    - 'Å':
+    - 'f,LONG_FOLLOW_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'MAX_UNCHANGED_STATS_OPTION':
         function: xnumtoumax
         type: unsigned long
-    - 'Ç':
+    - 'PID_OPTION':
         function: xdectoumax
         type: unknown
     - 's':
@@ -180,6 +237,10 @@ tail.c:
     - 's':
         function: quote
         type: char *
+tee.c:
+    - 'p':
+        function: XARGMATCH
+        type: unknown
 touch.c:
     - 't':
         function: quote
@@ -187,6 +248,9 @@ touch.c:
     - 't':
         function: quote
         type: char *
+    - 'TIME_OPTION':
+        function: XARGMATCH
+        type: unknown
 truncate.c:
     - ':
         function: xdectoimax
@@ -202,3 +266,13 @@ uniq.c:
     - '':
         function: quote
         type: char *
+    - 'D':
+        function: XARGMATCH
+        type: unknown
+    - 'GROUP_OPTION':
+        function: XARGMATCH
+        type: unknown
+wc.c:
+    - 'TOTAL_OPTION':
+        function: XARGMATCH
+        type: unknown

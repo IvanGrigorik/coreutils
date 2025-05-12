@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-out_file="out.txt"
+out_file="out.yaml"
 rm $out_file
 # out="$(../build/optarg-parser ../../src/kill.c -- -I../../lib/)"
 # "$out" >> $out_file

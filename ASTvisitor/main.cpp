@@ -23,7 +23,7 @@ class OptargVisitor : public RecursiveASTVisitor<OptargVisitor> {
 private:
   // Local "static" variables to keep track of case statements and conversion
   // functions
-  std::vector<char> currentCases{};
+  std::vector<std::string> currentCases{};
   std::map<std::string, std::string> FuncTypeMap;
   std::vector<std::unique_ptr<ASTUnit>> &ASTUnits;
 
@@ -49,15 +49,28 @@ public:
     Expr *E = S->getLHS();
 
     llvm::SmallString<16> Buffer;
-
     clang::Expr::EvalResult R;
+
     if (E->EvaluateAsInt(R, *Context)) {
       int val_int = R.Val.getInt().getSExtValue();
-      if (val_int < 0) {
-        return true;
+      // If longoption or shortoption can be passed as a one-char flag (e.g.
+      // `-9`)
+      if (val_int > 0 and val_int < CHAR_MAX) {
+        char val = static_cast<char>(val_int);
+        std::string s(1, val);
+        this->currentCases.push_back(s);
       }
-      char val = static_cast<char>(val_int);
-      this->currentCases.push_back(val);
+      // If the option can not be passed as a one-char flag (only longopts, e.g.
+      // `--ignore`). Often passed as enum value
+      else {
+        E = E->IgnoreParenImpCasts();
+        // If we can evaluate value as an enum value - proceed
+        if (auto *declRef = llvm::dyn_cast<clang::DeclRefExpr>(E)) {
+          std::string identifierName = declRef->getNameInfo().getAsString();
+          this->currentCases.push_back(identifierName);
+        }
+        // Else - skip
+      }
     }
 
     return true;
@@ -68,7 +81,7 @@ public:
     return true;
   }
 
-  //* functions visitor
+  // /* functions visitor */
   bool VisitCallExpr(CallExpr *call) {
     auto *callee = call->getDirectCallee();
     if (!callee) {
@@ -82,26 +95,35 @@ public:
 
     // Main code of the function visitor (invoked only in one of the function
     // argument is optarg)
-    Expr *arg = call->getArg(0)->IgnoreParenImpCasts();
-    if (DeclRefExpr *dre = dyn_cast<DeclRefExpr>(arg)) {
+    for (int i = 0; i < call->getNumArgs(); i++) {
 
-      if (dre->getNameInfo().getAsString() == "optarg") {
+      Expr *arg = call->getArg(i)->IgnoreParenImpCasts();
+      if (DeclRefExpr *dre = dyn_cast<DeclRefExpr>(arg)) {
 
-        // Gather all cases which converts optarg like that
-        std::string cases{"- \'"};
-        for (auto &sharedCase_ch : this->currentCases) {
-          cases += sharedCase_ch;
-          cases += ",";
+        if (dre->getNameInfo().getAsString() == "optarg") {
+
+          // If the case value is not a typeable char (for internal usage)
+          // if (this->currentCases.empty()) {
+          //   return true;
+          // }
+
+          // Gather all cases which converts optarg like that
+          std::string cases{"- \'"};
+          for (auto &sharedCase_ch : this->currentCases) {
+            cases += sharedCase_ch;
+            cases += ",";
+          }
+          cases.pop_back();
+          cases += "':";
+
+          // Gather types
+          std::string types = inferTypeRecursive(name, {});
+
+          llvm::outs() << "    " << cases << '\n';
+          llvm::outs() << "        function: " << name << "\n";
+          llvm::outs() << "        type: " << types << "\n";
+          return true;
         }
-        cases.pop_back();
-        cases += "':"; 
-        
-        // Gather types
-        std::string types = inferTypeRecursive(name, {});
-
-        llvm::outs() << "    " << cases << '\n';
-        llvm::outs() << "        function: " << name << "\n";
-        llvm::outs() << "        type: " << types << "\n";
       }
     }
     return true;
@@ -174,7 +196,7 @@ private:
 
         // The set have only one element - return it!
         if (resultTypes.size() < 2) {
-          return  *std::next(resultTypes.begin(), 1) + "\"";
+          return *std::next(resultTypes.begin(), 1) + "\"";
         }
 
         // return the potential types (if there are branching instructions)
