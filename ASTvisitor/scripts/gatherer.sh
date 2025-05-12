@@ -1,12 +1,13 @@
 #!/bin/bash
 
 
-rm out.txt
-
+out_file="out.txt"
+rm $out_file
 # out="$(../build/optarg-parser ../../src/kill.c -- -I../../lib/)"
-# "$out" >> out.txt
+# "$out" >> $out_file
 # echo "File output:"
-# echo "$out" > "out.txt"
+# echo "$out" > "$out_file"
+echo "---" >> "$out_file"
 
 for file in ../../src/*.c; do
     echo "File: $file"
@@ -14,8 +15,8 @@ for file in ../../src/*.c; do
     if [[ ! "$out" ]]; then
         continue
     fi
-
-    echo "File: $file:" >> "out.txt"
-    echo "$out" >> "out.txt"
-    echo "------------------------" >> "out.txt"
+    filename=$(basename "$file")
+    echo "$filename:" >> "$out_file"
+    echo "$out" >> "$out_file"
+    # echo "------------------------" >> "$out_file"
 done

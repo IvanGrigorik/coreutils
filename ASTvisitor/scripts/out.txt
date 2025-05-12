@@ -1,217 +1,204 @@
-File: ../../src/basenc.c:
-shared cases: w 
-optarg used in function: quote
-Inferred type: char *
-shared cases: w 
-optarg used in function: quote
-Inferred type: char *
-------------------------
-File: ../../src/chown.c:
-shared cases: Å 
-optarg used in function: parse_user_spec_warn
-Inferred type: char *
-shared cases: Å 
-optarg used in function: quote
-Inferred type: char *
-shared cases: Å 
-optarg used in function: quote
-Inferred type: char *
-------------------------
-File: ../../src/comm.c:
-shared cases: Ç 
-optarg used in function: strlen
-Inferred type: char *
-------------------------
-File: ../../src/cut.c:
-shared cases: Ä 
-optarg used in function: strlen
-Inferred type: char *
-------------------------
-File: ../../src/du.c:
-shared cases: d 
-optarg used in function: quote
-Inferred type: char *
-shared cases: d 
-optarg used in function: quote
-Inferred type: char *
-shared cases: t 
-optarg used in function: xstrtoimax
-Inferred type: long
-------------------------
-File: ../../src/expand.c:
-shared cases: t 
-optarg used in function: parse_tab_stops
-Inferred type: unknown
-------------------------
-File: ../../src/fold.c:
-shared cases: 0 1 2 3 4 5 6 7 8 9 w 
-optarg used in function: xnumtoumax
-Inferred type: unsigned long
-------------------------
-File: ../../src/install.c:
-shared cases: Ç 
-optarg used in function: xstrdup
-Inferred type: unknown
-------------------------
-File: ../../src/kill.c:
-shared cases: 0 1 2 3 4 5 6 7 8 9 A B C D E F G H I J K M N O P Q R S T U V W X Y Z n s 
-optarg used in function: quote
-Inferred type: char *
-shared cases: 0 1 2 3 4 5 6 7 8 9 A B C D E F G H I J K M N O P Q R S T U V W X Y Z n s 
-optarg used in function: quote
-Inferred type: char *
-shared cases: 0 1 2 3 4 5 6 7 8 9 A B C D E F G H I J K M N O P Q R S T U V W X Y Z n s 
-optarg used in function: operand2sig
-Inferred type: unknown
-------------------------
-File: ../../src/nl.c:
-shared cases: p 
-optarg used in function: re_compile_pattern
-Inferred type: unknown
-shared cases: p 
-optarg used in function: strlen
-Inferred type: char *
-shared cases: h 
-optarg used in function: quote
-Inferred type: char *
-shared cases: h 
-optarg used in function: quote
-Inferred type: char *
-shared cases: b 
-optarg used in function: quote
-Inferred type: char *
-shared cases: b 
-optarg used in function: quote
-Inferred type: char *
-shared cases: f 
-optarg used in function: quote
-Inferred type: char *
-shared cases: f 
-optarg used in function: quote
-Inferred type: char *
-shared cases: v 
-optarg used in function: xdectoimax
-Inferred type: unknown
-shared cases: i 
-optarg used in function: xdectoimax
-Inferred type: unknown
-shared cases: l 
-optarg used in function: xnumtoimax
-Inferred type: unknown
-shared cases: w 
-optarg used in function: xnumtoimax
-Inferred type: unknown
-shared cases: n 
-optarg used in function: strcmp
-Inferred type: unknown
-shared cases: n 
-optarg used in function: strcmp
-Inferred type: unknown
-shared cases: n 
-optarg used in function: strcmp
-Inferred type: unknown
-shared cases: n 
-optarg used in function: quote
-Inferred type: char *
-shared cases: n 
-optarg used in function: quote
-Inferred type: char *
-shared cases: d 
-optarg used in function: strlen
-Inferred type: char *
-------------------------
-File: ../../src/nproc.c:
-shared cases: Å 
-optarg used in function: xnumtoumax
-Inferred type: unsigned long
-------------------------
-File: ../../src/numfmt.c:
-shared cases: Å 
-optarg used in function: unit_to_umax
-Inferred type: potential: char *, raw, unknown
-shared cases: É 
-optarg used in function: unit_to_umax
-Inferred type: potential: char *, raw, unknown
-shared cases: á 
-optarg used in function: quote
-Inferred type: char *
-shared cases: á 
-optarg used in function: quote
-Inferred type: char *
-shared cases: à 
-optarg used in function: set_fields
-Inferred type: unknown
-shared cases: ã 
-optarg used in function: quote
-Inferred type: char *
-shared cases: ã 
-optarg used in function: quote
-Inferred type: char *
-------------------------
-File: ../../src/rm.c:
-shared cases: É 
-optarg used in function: strcmp
-Inferred type: unknown
-------------------------
-File: ../../src/shred.c:
-shared cases: n 
-optarg used in function: xdectoumax
-Inferred type: unknown
-shared cases: s 
-optarg used in function: xnumtoumax
-Inferred type: unsigned long
-------------------------
-File: ../../src/shuf.c:
-shared cases: n 
-optarg used in function: quote
-Inferred type: char *
-shared cases: n 
-optarg used in function: quote
-Inferred type: char *
-------------------------
-File: ../../src/tail.c:
-shared cases: c n 
-optarg used in function: xnumtoumax
-Inferred type: unsigned long
-shared cases: Å 
-optarg used in function: xnumtoumax
-Inferred type: unsigned long
-shared cases: Ç 
-optarg used in function: xdectoumax
-Inferred type: unknown
-shared cases: s 
-optarg used in function: xstrtod
-Inferred type: double
-shared cases: s 
-optarg used in function: quote
-Inferred type: char *
-shared cases: s 
-optarg used in function: quote
-Inferred type: char *
-------------------------
-File: ../../src/touch.c:
-shared cases: t 
-optarg used in function: quote
-Inferred type: char *
-shared cases: t 
-optarg used in function: quote
-Inferred type: char *
-------------------------
-File: ../../src/truncate.c:
-shared cases: 
-optarg used in function: xdectoimax
-Inferred type: unknown
-------------------------
-File: ../../src/unexpand.c:
-shared cases: t 
-optarg used in function: parse_tab_stops
-Inferred type: unknown
-------------------------
-File: ../../src/uniq.c:
-shared cases:  
-optarg used in function: quote
-Inferred type: char *
-shared cases:  
-optarg used in function: quote
-Inferred type: char *
-------------------------
+---
+basenc.c:
+    - 'w':
+        function: quote
+        type: char *
+    - 'w':
+        function: quote
+        type: char *
+chown.c:
+    - 'Å':
+        function: parse_user_spec_warn
+        type: char *
+    - 'Å':
+        function: quote
+        type: char *
+    - 'Å':
+        function: quote
+        type: char *
+comm.c:
+    - 'Ç':
+        function: strlen
+        type: char *
+cut.c:
+    - 'Ä':
+        function: strlen
+        type: char *
+du.c:
+    - 'd':
+        function: quote
+        type: char *
+    - 'd':
+        function: quote
+        type: char *
+    - 't':
+        function: xstrtoimax
+        type: long
+expand.c:
+    - 't':
+        function: parse_tab_stops
+        type: unknown
+fold.c:
+    - '0,1,2,3,4,5,6,7,8,9,w':
+        function: xnumtoumax
+        type: unsigned long
+install.c:
+    - 'Ç':
+        function: xstrdup
+        type: unknown
+kill.c:
+    - '0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,n,s':
+        function: quote
+        type: char *
+    - '0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,n,s':
+        function: quote
+        type: char *
+    - '0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,n,s':
+        function: operand2sig
+        type: unknown
+nl.c:
+    - 'p':
+        function: re_compile_pattern
+        type: unknown
+    - 'p':
+        function: strlen
+        type: char *
+    - 'h':
+        function: quote
+        type: char *
+    - 'h':
+        function: quote
+        type: char *
+    - 'b':
+        function: quote
+        type: char *
+    - 'b':
+        function: quote
+        type: char *
+    - 'f':
+        function: quote
+        type: char *
+    - 'f':
+        function: quote
+        type: char *
+    - 'v':
+        function: xdectoimax
+        type: unknown
+    - 'i':
+        function: xdectoimax
+        type: unknown
+    - 'l':
+        function: xnumtoimax
+        type: unknown
+    - 'w':
+        function: xnumtoimax
+        type: unknown
+    - 'n':
+        function: strcmp
+        type: unknown
+    - 'n':
+        function: strcmp
+        type: unknown
+    - 'n':
+        function: strcmp
+        type: unknown
+    - 'n':
+        function: quote
+        type: char *
+    - 'n':
+        function: quote
+        type: char *
+    - 'd':
+        function: strlen
+        type: char *
+nproc.c:
+    - 'Å':
+        function: xnumtoumax
+        type: unsigned long
+numfmt.c:
+    - 'Å':
+        function: unit_to_umax
+        type: 
+        - char *
+        - raw
+        - unknown
+    - 'É':
+        function: unit_to_umax
+        type: 
+        - char *
+        - raw
+        - unknown
+    - 'á':
+        function: quote
+        type: char *
+    - 'á':
+        function: quote
+        type: char *
+    - 'à':
+        function: set_fields
+        type: unknown
+    - 'ã':
+        function: quote
+        type: char *
+    - 'ã':
+        function: quote
+        type: char *
+rm.c:
+    - 'É':
+        function: strcmp
+        type: unknown
+shred.c:
+    - 'n':
+        function: xdectoumax
+        type: unknown
+    - 's':
+        function: xnumtoumax
+        type: unsigned long
+shuf.c:
+    - 'n':
+        function: quote
+        type: char *
+    - 'n':
+        function: quote
+        type: char *
+tail.c:
+    - 'c,n':
+        function: xnumtoumax
+        type: unsigned long
+    - 'Å':
+        function: xnumtoumax
+        type: unsigned long
+    - 'Ç':
+        function: xdectoumax
+        type: unknown
+    - 's':
+        function: xstrtod
+        type: double
+    - 's':
+        function: quote
+        type: char *
+    - 's':
+        function: quote
+        type: char *
+touch.c:
+    - 't':
+        function: quote
+        type: char *
+    - 't':
+        function: quote
+        type: char *
+truncate.c:
+    - ':
+        function: xdectoimax
+        type: unknown
+unexpand.c:
+    - 't':
+        function: parse_tab_stops
+        type: unknown
+uniq.c:
+    - '':
+        function: quote
+        type: char *
+    - '':
+        function: quote
+        type: char *

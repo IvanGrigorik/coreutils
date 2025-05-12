@@ -47,13 +47,11 @@ public:
 
   bool VisitCaseStmt(CaseStmt *S) {
     Expr *E = S->getLHS();
-    // llvm::outs() << E << '\n';
 
     llvm::SmallString<16> Buffer;
 
     clang::Expr::EvalResult R;
     if (E->EvaluateAsInt(R, *Context)) {
-      // uint64_t C = R.Val.getInt();
       int val_int = R.Val.getInt().getSExtValue();
       if (val_int < 0) {
         return true;
@@ -66,11 +64,7 @@ public:
   }
 
   bool VisitBreakStmt(BreakStmt *S) {
-    // for (auto& cs : this->currentCases) {
-    //   llvm::outs() << cs << '\n';
-    // }
     currentCases.clear();
-    // llvm::outs() << "Break encountered!\n";
     return true;
   }
 
@@ -94,19 +88,20 @@ public:
       if (dre->getNameInfo().getAsString() == "optarg") {
 
         // Gather all cases which converts optarg like that
-        llvm::outs() << "shared cases: ";
+        std::string cases{"- \'"};
         for (auto &sharedCase_ch : this->currentCases) {
-          llvm::outs() << sharedCase_ch << " ";
+          cases += sharedCase_ch;
+          cases += ",";
         }
-        llvm::outs() << '\n';
-        // Truncate two last chars
-        // cases = cases.substr(0, cases.size() - 2);
-
+        cases.pop_back();
+        cases += "':"; 
+        
         // Gather types
         std::string types = inferTypeRecursive(name, {});
 
-        llvm::outs() << "optarg used in function: " << name << "\n";
-        llvm::outs() << "Inferred type: " << types << "\n";
+        llvm::outs() << "    " << cases << '\n';
+        llvm::outs() << "        function: " << name << "\n";
+        llvm::outs() << "        type: " << types << "\n";
       }
     }
     return true;
@@ -179,15 +174,15 @@ private:
 
         // The set have only one element - return it!
         if (resultTypes.size() < 2) {
-          return *std::next(resultTypes.begin(), 1);
+          return  *std::next(resultTypes.begin(), 1) + "\"";
         }
 
         // return the potential types (if there are branching instructions)
-        std::string combined = "potential: ";
+        std::string combined = "\n";
         for (const std::string &t : resultTypes) {
-          combined += t + ", ";
+          combined += "        - " + t + "\n";
         }
-        combined = combined.substr(0, combined.size() - 2);
+        combined.pop_back();
 
         return combined;
       }
