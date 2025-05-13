@@ -1,0 +1,120 @@
+\begin{longtable}{|p{0.3\linewidth}|p{0.4\linewidth}|p{0.3\linewidth}|}
+\hline
+Command& Parsed& Not parsed\\
+\hline
+\hline
+kill & 0 1 2 3 4 5 6 7 8 9 A B C D E F G H I J K M N O P Q R S T U V W X Y Z n s &  \textit{none}\\ 
+\hline
+pr &  \textit{none} &D N W columns h l o w\\ 
+\hline
+csplit &  \textit{none} &b f n\\ 
+\hline
+realpath &  \textit{none} &relative-base relative-to\\ 
+\hline
+timeout &  \textit{none} &k s\\ 
+\hline
+uniq & (ascii number)1 D GROUP\_OPTION & f s w\\ 
+\hline
+tee & p &  \textit{none}\\ 
+\hline
+mknod &  \textit{none} &m\\ 
+\hline
+join &  \textit{none} &1 2 a e j o t v\\ 
+\hline
+mkfifo &  \textit{none} &m\\ 
+\hline
+du & B TIME\_OPTION d t & X exclude files0-from time-style\\ 
+\hline
+touch & TIME\_OPTION t & d r\\ 
+\hline
+date & I RFC\_3339\_OPTION & d f r rfc-3339 s\\ 
+\hline
+ln &  \textit{none} &S t\\ 
+\hline
+fmt &  \textit{none} &g p w\\ 
+\hline
+unexpand & t &  \textit{none}\\ 
+\hline
+shred & RANDOM\_SOURCE\_OPTION n s u &  \textit{none}\\ 
+\hline
+tac &  \textit{none} &s\\ 
+\hline
+ptx &  \textit{none} &F M S W b format g i o w\\ 
+\hline
+head &  \textit{none} &c n\\ 
+\hline
+stat &  \textit{none} &c cached printf\\ 
+\hline
+mkdir &  \textit{none} &m\\ 
+\hline
+chcon &  \textit{none} &l r reference t u\\ 
+\hline
+mv & u & S t\\ 
+\hline
+nproc & IGNORE\_OPTION & ignore\\ 
+\hline
+basenc & w &  \textit{none}\\ 
+\hline
+cp &  \textit{none} &S t\\ 
+\hline
+install & STRIP\_PROGRAM\_OPTION & S g m o strip-program t\\ 
+\hline
+numfmt & FIELD\_OPTION FROM\_OPTION FROM\_UNIT\_OPTION HEADER\_OPTION INVALID\_OPTION PADDING\_OPTION ROUND\_OPTION TO\_OPTION TO\_UNIT\_OPTION & d field format from-unit invalid padding round suffix to to-unit\\ 
+\hline
+env &  \textit{none} &C S a u\\ 
+\hline
+rm & INTERACTIVE\_OPTION PRESERVE\_ROOT &  \textit{none}\\ 
+\hline
+stdbuf &  \textit{none} &e i o\\ 
+\hline
+sort &  \textit{none} &S T batch-size compress-program files0-from k o parallel random-source sort t y\\ 
+\hline
+nl & b d f h i l n p v w & s\\ 
+\hline
+chmod &  \textit{none} &reference\\ 
+\hline
+od &  \textit{none} &A N S endian j t\\ 
+\hline
+printenv &  \textit{none} &u\\ 
+\hline
+stty &  \textit{none} &F\\ 
+\hline
+fold & 0 1 2 3 4 5 6 7 8 9 w &  \textit{none}\\ 
+\hline
+df &  \textit{none} &B F t x\\ 
+\hline
+paste &  \textit{none} &d\\ 
+\hline
+cut & OUTPUT\_DELIMITER\_OPTION & b c d f output-delimiter\\ 
+\hline
+ls &  \textit{none} &I T block-size format hide indicator-style quoting-style sort time time-style w\\ 
+\hline
+wc & TOTAL\_OPTION & files0-from total\\ 
+\hline
+tail & LONG\_FOLLOW\_OPTION MAX\_UNCHANGED\_STATS\_OPTION PID\_OPTION c f n s & max-unchanged-stats\\ 
+\hline
+nice &  \textit{none} &n\\ 
+\hline
+digest &  \textit{none} &length\\ 
+\hline
+seq &  \textit{none} &f s\\ 
+\hline
+shuf & RANDOM\_SOURCE\_OPTION n o & i\\ 
+\hline
+truncate &  \textit{none} &r s\\ 
+\hline
+chown & FROM\_OPTION & from reference\\ 
+\hline
+mktemp &  \textit{none} &p suffix\\ 
+\hline
+basename &  \textit{none} &s\\ 
+\hline
+split &  \textit{none} &-io-blksize C a additional-suffix b filter l n t\\ 
+\hline
+runcon &  \textit{none} &l r t u\\ 
+\hline
+comm & OUTPUT\_DELIMITER\_OPTION & output-delimiter\\ 
+\hline
+expand & t &  \textit{none}\\ 
+\hline
+\end{longtable}
