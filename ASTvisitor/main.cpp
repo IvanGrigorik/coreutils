@@ -55,10 +55,16 @@ public:
       int val_int = R.Val.getInt().getSExtValue();
       // If longoption or shortoption can be passed as a one-char flag (e.g.
       // `-9`)
-      if (val_int > 0 and val_int < CHAR_MAX) {
-        char val = static_cast<char>(val_int);
-        std::string s(1, val);
+      if (val_int > 0 && val_int < CHAR_MAX) {
+        std::string s;
+        if (!isprint(val_int)) {
+          s = "(ascii number)" + std::to_string(val_int);
+        } else {
+          char val = static_cast<char>(val_int);
+          s = std::string(1, val);
+        }
         this->currentCases.push_back(s);
+
       }
       // If the option can not be passed as a one-char flag (only longopts, e.g.
       // `--ignore`). Often passed as enum value
@@ -93,6 +99,10 @@ public:
       return true;
     }
 
+    if (this->currentCases.empty()) {
+      return true;
+    }
+    
     // Main code of the function visitor (invoked only in one of the function
     // argument is optarg)
     for (int i = 0; i < call->getNumArgs(); i++) {
@@ -103,9 +113,6 @@ public:
         if (dre->getNameInfo().getAsString() == "optarg") {
 
           // If the case value is not a typeable char (for internal usage)
-          // if (this->currentCases.empty()) {
-          //   return true;
-          // }
 
           // Gather all cases which converts optarg like that
           std::string cases{"- \'"};

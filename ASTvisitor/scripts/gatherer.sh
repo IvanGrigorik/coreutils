@@ -15,7 +15,7 @@ for file in ../../src/*.c; do
     if [[ ! "$out" ]]; then
         continue
     fi
-    filename=$(basename "$file")
+    filename=$(basename "${file%.c}")
     echo "$filename:" >> "$out_file"
     echo "$out" >> "$out_file"
     # echo "------------------------" >> "$out_file"
