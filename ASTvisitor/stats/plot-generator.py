@@ -122,9 +122,6 @@ def gen_table(merged: dict[str: dict[str:list]]):
     
     return out
 
-def gen_num(merged):
-    
-
 def main():
     typed_commands: dict[str: list[str]] = parse_type_file()
     parsed_commands: dict[str: dict[str: str]] = parse_arg_file()
@@ -132,8 +129,8 @@ def main():
     merged = merge(typed_commands, parsed_commands)
 
     out = gen_table(merged)
-    num = gen_nums(merged)
-    with open("table.tex", "w") as file:
+    # num = gen_nums(merged)
+    with open("./tex/table.tex", "w") as file:
         file.truncate()
         file.write(out)
 

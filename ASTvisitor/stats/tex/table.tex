@@ -5,13 +5,13 @@ Command& Parsed& Not parsed\\
 \hline
 kill & 0 1 2 3 4 5 6 7 8 9 A B C D E F G H I J K M N O P Q R S T U V W X Y Z n s &  \textit{none}\\ 
 \hline
-pr &  \textit{none} &D N W columns h l o w\\ 
+pr & COLUMNS\_OPTION N PAGES\_OPTION S W e i l n o s w & D columns h\\ 
 \hline
 csplit &  \textit{none} &b f n\\ 
 \hline
 realpath &  \textit{none} &relative-base relative-to\\ 
 \hline
-timeout &  \textit{none} &k s\\ 
+timeout & k s &  \textit{none}\\ 
 \hline
 uniq & (ascii number)1 D GROUP\_OPTION & f s w\\ 
 \hline
@@ -19,7 +19,7 @@ tee & p &  \textit{none}\\
 \hline
 mknod &  \textit{none} &m\\ 
 \hline
-join &  \textit{none} &1 2 a e j o t v\\ 
+join & (ascii number)1 a e o t v & 1 2 j\\ 
 \hline
 mkfifo &  \textit{none} &m\\ 
 \hline
@@ -31,7 +31,7 @@ date & I RFC\_3339\_OPTION & d f r rfc-3339 s\\
 \hline
 ln &  \textit{none} &S t\\ 
 \hline
-fmt &  \textit{none} &g p w\\ 
+fmt & p & g w\\ 
 \hline
 unexpand & t &  \textit{none}\\ 
 \hline
@@ -39,9 +39,9 @@ shred & RANDOM\_SOURCE\_OPTION n s u &  \textit{none}\\
 \hline
 tac &  \textit{none} &s\\ 
 \hline
-ptx &  \textit{none} &F M S W b format g i o w\\ 
+ptx & (ascii number)10 F S W g w & M b format i o\\ 
 \hline
-head &  \textit{none} &c n\\ 
+head & c n &  \textit{none}\\ 
 \hline
 stat &  \textit{none} &c cached printf\\ 
 \hline
@@ -55,19 +55,19 @@ nproc & IGNORE\_OPTION & ignore\\
 \hline
 basenc & w &  \textit{none}\\ 
 \hline
-cp &  \textit{none} &S t\\ 
+cp & NO\_PRESERVE\_ATTRIBUTES\_OPTION PRESERVE\_ATTRIBUTES\_OPTION REFLINK\_OPTION SPARSE\_OPTION u & S t\\ 
 \hline
 install & STRIP\_PROGRAM\_OPTION & S g m o strip-program t\\ 
 \hline
 numfmt & FIELD\_OPTION FROM\_OPTION FROM\_UNIT\_OPTION HEADER\_OPTION INVALID\_OPTION PADDING\_OPTION ROUND\_OPTION TO\_OPTION TO\_UNIT\_OPTION & d field format from-unit invalid padding round suffix to to-unit\\ 
 \hline
-env &  \textit{none} &C S a u\\ 
+env & BLOCK\_SIGNAL\_OPTION DEFAULT\_SIGNAL\_OPTION IGNORE\_SIGNAL\_OPTION S u & C a\\ 
 \hline
 rm & INTERACTIVE\_OPTION PRESERVE\_ROOT &  \textit{none}\\ 
 \hline
-stdbuf &  \textit{none} &e i o\\ 
+stdbuf & e i o &  \textit{none}\\ 
 \hline
-sort &  \textit{none} &S T batch-size compress-program files0-from k o parallel random-source sort t y\\ 
+sort & CHECK\_OPTION COMPRESS\_PROGRAM\_OPTION NMERGE\_OPTION PARALLEL\_OPTION RANDOM\_SOURCE\_OPTION S SORT\_OPTION T k o t & batch-size compress-program files0-from parallel random-source sort y\\ 
 \hline
 nl & b d f h i l n p v w & s\\ 
 \hline
@@ -81,13 +81,13 @@ stty &  \textit{none} &F\\
 \hline
 fold & 0 1 2 3 4 5 6 7 8 9 w &  \textit{none}\\ 
 \hline
-df &  \textit{none} &B F t x\\ 
+df & B F OUTPUT\_OPTION t x &  \textit{none}\\ 
 \hline
 paste &  \textit{none} &d\\ 
 \hline
 cut & OUTPUT\_DELIMITER\_OPTION & b c d f output-delimiter\\ 
 \hline
-ls &  \textit{none} &I T block-size format hide indicator-style quoting-style sort time time-style w\\ 
+ls & BLOCK\_SIZE\_OPTION COLOR\_OPTION F FORMAT\_OPTION HYPERLINK\_OPTION I INDICATOR\_STYLE\_OPTION SORT\_OPTION T TIME\_OPTION w & block-size format hide indicator-style quoting-style sort time time-style\\ 
 \hline
 wc & TOTAL\_OPTION & files0-from total\\ 
 \hline
@@ -109,7 +109,7 @@ mktemp &  \textit{none} &p suffix\\
 \hline
 basename &  \textit{none} &s\\ 
 \hline
-split &  \textit{none} &-io-blksize C a additional-suffix b filter l n t\\ 
+split & ADDITIONAL\_SUFFIX\_OPTION C b d l n t x & -io-blksize a additional-suffix filter\\ 
 \hline
 runcon &  \textit{none} &l r t u\\ 
 \hline
