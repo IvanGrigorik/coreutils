@@ -119,8 +119,35 @@ def gen_table(merged: dict[str: dict[str:list]]):
     out += "\\hline\n" + texheader + '\n'
     out += texdata
     out += "\\end{longtable}" + '\n'
-    
+
     return out
+
+
+def gen_numbers(merged: dict[str: dict[str:list]]):
+    total = len(merged)
+    fully_parsed = len([name
+                        for name, info in merged.items()
+                        if not info["not parsed"]
+                        and info["parsed"]])
+    partially_parsed = len([name
+                            for name, info in merged.items()
+                            if info["not parsed"]
+                            and info["parsed"]])
+    fully_unparsed = len([name
+                          for name, info in merged.items()
+                          if info["not parsed"]
+                          and not info["parsed"]])
+    out = ""
+    out += "\\texttt{Total commands (with and without opt arguments): " + \
+        f"{total}" + "}\\newline\n"
+    out += "\\texttt{Total commands (only with opt arguments): " + \
+        f"{fully_unparsed + partially_parsed + fully_parsed}" + "}\\newline\n"
+    out += "\\texttt{Fully parsed: " + f"{fully_parsed}" + "}\\newline\n"
+    out += "\\texttt{Partially parsed: " + \
+        f"{partially_parsed}" + "}\\newline\n"
+    out += "\\texttt{Fully unparsed: " + f"{fully_unparsed}" + "}\\newline\n"
+    return out
+
 
 def main():
     typed_commands: dict[str: list[str]] = parse_type_file()
@@ -131,6 +158,11 @@ def main():
     out = gen_table(merged)
     # num = gen_nums(merged)
     with open("./tex/table.tex", "w") as file:
+        file.truncate()
+        file.write(out)
+
+    out = gen_numbers(merged)
+    with open("./tex/numbers.tex", "w") as file:
         file.truncate()
         file.write(out)
 
