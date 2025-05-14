@@ -24,6 +24,7 @@ private:
   // Local "static" variables to keep track of case statements and conversion
   // functions
   std::vector<std::string> currentCases{};
+  std::vector<std::string> funcDecls{};
   std::map<std::string, std::string> FuncTypeMap;
   std::vector<std::unique_ptr<ASTUnit>> &ASTUnits;
 
@@ -43,6 +44,12 @@ public:
       Context = &AST->getASTContext();
       TraverseDecl(Context->getTranslationUnitDecl());
     }
+  }
+
+  bool VisitFunctionDecl(FunctionDecl *D) {
+    // llvm::outs() << "Function decl: " << D->getNameAsString() << '\n';
+    funcDecls.emplace_back(D->getNameAsString());
+    return true;
   }
 
   bool VisitCaseStmt(CaseStmt *S) {
@@ -89,7 +96,15 @@ public:
 
   // /* functions visitor */
   bool VisitCallExpr(CallExpr *call) {
+    call->getStmtClassName();
+
+    // Check if we trying to deduce type for some case
+    if (this->currentCases.empty()) {
+      return true;
+    }
+
     auto *callee = call->getDirectCallee();
+
     if (!callee) {
       return true;
     }
@@ -99,10 +114,6 @@ public:
       return true;
     }
 
-    if (this->currentCases.empty()) {
-      return true;
-    }
-    
     // Main code of the function visitor (invoked only in one of the function
     // argument is optarg)
     for (int i = 0; i < call->getNumArgs(); i++) {
@@ -111,8 +122,6 @@ public:
       if (DeclRefExpr *dre = dyn_cast<DeclRefExpr>(arg)) {
 
         if (dre->getNameInfo().getAsString() == "optarg") {
-
-          // If the case value is not a typeable char (for internal usage)
 
           // Gather all cases which converts optarg like that
           std::string cases{"- \'"};
@@ -152,6 +161,8 @@ private:
         {"strncat", "char *"},
         {"quote", "char *"},
         {"parse_user_spec_warn", "char *"},
+        {"c_isdigit", "char *"},
+        {"xstrdup", "char *"},
         {"strtol", "long"},
         {"strtoul", "unsigned long"},
         {"strtoll", "long long"},
@@ -180,7 +191,7 @@ private:
     if (FuncTypeMap.count(fname)) {
       return FuncTypeMap[fname];
     }
-    if (visited.count(fname)) {
+    if (!visited.empty() && visited.count(fname)) {
       return "unknown";
     }
     visited.insert(fname);
@@ -192,7 +203,6 @@ private:
         if (!fd || !(fd->getNameAsString() == fname && fd->hasBody())) {
           continue;
         }
-
         // Trying to gather the types from functions
         std::set<std::string> resultTypes =
             gatherTypesFromStmt(fd->getBody(), visited);
@@ -200,10 +210,8 @@ private:
         if (resultTypes.empty()) {
           continue;
         }
-
-        // The set have only one element - return it!
-        if (resultTypes.size() < 2) {
-          return *std::next(resultTypes.begin(), 1) + "\"";
+        if (resultTypes.size() == 1) {
+          return *resultTypes.begin(); // Safe return of the only type
         }
 
         // return the potential types (if there are branching instructions)
@@ -235,6 +243,7 @@ private:
       if (CallExpr *call = dyn_cast<CallExpr>(child)) {
         if (FunctionDecl *fd = call->getDirectCallee()) {
           std::string name = fd->getNameAsString();
+          llvm::outs() << "Func call: " << name << '\n' ;
           types.insert(inferTypeRecursive(name, visited));
         }
       } else {
