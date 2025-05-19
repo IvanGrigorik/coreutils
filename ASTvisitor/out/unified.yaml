@@ -1,0 +1,187 @@
+basenc:
+  w:
+  - char *
+chown:
+  FROM_OPTION:
+  - char *
+comm:
+  OUTPUT_DELIMITER_OPTION:
+  - char *
+cp:
+  NO_PRESERVE_ATTRIBUTES_OPTION, PRESERVE_ATTRIBUTES_OPTION:
+  - char *
+  - unknown
+  SPARSE_OPTION, REFLINK_OPTION, u:
+  - unknown
+cut:
+  OUTPUT_DELIMITER_OPTION:
+  - char *
+date:
+  RFC_3339_OPTION, I:
+  - unknown
+df:
+  B:
+  - long
+  F, t, x:
+  - unknown
+  OUTPUT_OPTION:
+  - char *
+  - unknown
+du:
+  TIME_OPTION:
+  - unknown
+  d:
+  - char *
+  t, B:
+  - long
+env:
+  DEFAULT_SIGNAL_OPTION, IGNORE_SIGNAL_OPTION, BLOCK_SIGNAL_OPTION:
+  - char *
+  - unknown
+  S:
+  - raw
+  - unknown
+  u:
+  - unknown
+expand:
+  t:
+  - unknown
+fmt:
+  p:
+  - char *
+fold:
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, w:
+  - unsigned long
+head:
+  c, n:
+  - unsigned long
+install:
+  STRIP_PROGRAM_OPTION:
+  - char *
+join:
+  o, (ascii number)1:
+  - char *
+  - unknown
+  v, a, e, t:
+  - char *
+kill:
+  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F, G, H, I, J, K, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, n, s:
+  - char *
+  - unknown
+ls:
+  BLOCK_SIZE_OPTION:
+  - long
+  F, I, SORT_OPTION, TIME_OPTION, FORMAT_OPTION, COLOR_OPTION, HYPERLINK_OPTION, INDICATOR_STYLE_OPTION:
+  - unknown
+  T:
+  - unsigned long
+  w:
+  - char *
+  - unknown
+  - unsigned long
+mv:
+  u:
+  - unknown
+nl:
+  h, b, f, n, d:
+  - char *
+  p:
+  - char *
+  - unknown
+  v, i, l, w:
+  - unknown
+nproc:
+  IGNORE_OPTION:
+  - unsigned long
+numfmt:
+  FROM_OPTION, TO_OPTION, ROUND_OPTION, FIELD_OPTION, INVALID_OPTION:
+  - unknown
+  FROM_UNIT_OPTION, TO_UNIT_OPTION:
+  - char *
+  - raw
+  - unknown
+  PADDING_OPTION, HEADER_OPTION:
+  - char *
+pr:
+  COLUMNS_OPTION, l, N, o, w, W:
+  - unknown
+  PAGES_OPTION, e, i, n, s, S:
+  - char *
+  - unknown
+ptx:
+  F, S, W, (ascii number)10:
+  - unknown
+  g, w:
+  - char *
+rm:
+  INTERACTIVE_OPTION:
+  - unknown
+  PRESERVE_ROOT:
+  - char *
+shred:
+  RANDOM_SOURCE_OPTION:
+  - char *
+  n, u:
+  - unknown
+  s:
+  - unsigned long
+shuf:
+  n, o, RANDOM_SOURCE_OPTION:
+  - char *
+sort:
+  COMPRESS_PROGRAM_OPTION, o, RANDOM_SOURCE_OPTION, t:
+  - char *
+  NMERGE_OPTION, S, PARALLEL_OPTION:
+  - long
+  - unknown
+  SORT_OPTION, CHECK_OPTION, T:
+  - unknown
+  k:
+  - unknown
+  - unsigned long
+split:
+  ADDITIONAL_SUFFIX_OPTION, d, x:
+  - char *
+  - unknown
+  b, l, C, n:
+  - unknown
+  t:
+  - char *
+stdbuf:
+  e, i, o:
+  - char *
+  - unknown
+tail:
+  c, n, MAX_UNCHANGED_STATS_OPTION:
+  - unsigned long
+  f, LONG_FOLLOW_OPTION, PID_OPTION:
+  - unknown
+  s:
+  - char *
+  - double
+tee:
+  p:
+  - unknown
+timeout:
+  k:
+  - char *
+  - double
+  - unknown
+  s:
+  - unknown
+touch:
+  TIME_OPTION:
+  - unknown
+  t:
+  - char *
+unexpand:
+  t:
+  - unknown
+uniq:
+  (ascii number)1:
+  - char *
+  D, GROUP_OPTION:
+  - unknown
+wc:
+  TOTAL_OPTION:
+  - unknown

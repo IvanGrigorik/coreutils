@@ -1,0 +1,658 @@
+---
+basenc:
+    - 'w':
+        function: quote
+        type: char *
+    - 'w':
+        function: quote
+        type: char *
+chown:
+    - 'FROM_OPTION':
+        function: parse_user_spec_warn
+        type: char *
+    - 'FROM_OPTION':
+        function: quote
+        type: char *
+    - 'FROM_OPTION':
+        function: quote
+        type: char *
+comm:
+    - 'OUTPUT_DELIMITER_OPTION':
+        function: strcmp
+        type: char *
+    - 'OUTPUT_DELIMITER_OPTION':
+        function: strlen
+        type: char *
+cp:
+    - 'SPARSE_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'REFLINK_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'NO_PRESERVE_ATTRIBUTES_OPTION':
+        function: decode_preserve_arg
+        type: 
+        - char *
+        - unknown
+    - 'PRESERVE_ATTRIBUTES_OPTION':
+        function: decode_preserve_arg
+        type: 
+        - char *
+        - unknown
+    - 'u':
+        function: XARGMATCH
+        type: unknown
+cut:
+    - 'OUTPUT_DELIMITER_OPTION':
+        function: strlen
+        type: char *
+date:
+    - 'RFC_3339_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'I':
+        function: XARGMATCH
+        type: unknown
+df:
+    - 'B':
+        function: xstrtol_fatal
+        type: long
+    - 'F,t':
+        function: add_fs_type
+        type: unknown
+    - 'x':
+        function: add_excluded_fs_type
+        type: unknown
+    - 'OUTPUT_OPTION':
+        function: decode_output_arg
+        type: 
+        - 
+        - 
+        - char *
+        - unknown
+        - unknown
+        - char *
+        - unknown
+du:
+    - 'd':
+        function: quote
+        type: char *
+    - 'd':
+        function: quote
+        type: char *
+    - 't':
+        function: xstrtoimax
+        type: long
+    - 't':
+        function: xstrtol_fatal
+        type: long
+    - 'B':
+        function: xstrtol_fatal
+        type: long
+    - 'TIME_OPTION':
+        function: XARGMATCH
+        type: unknown
+env:
+    - 'u':
+        function: append_unset_var
+        type: unknown
+    - 'DEFAULT_SIGNAL_OPTION':
+        function: parse_signal_action_params
+        type: 
+        - char *
+        - unknown
+    - 'DEFAULT_SIGNAL_OPTION':
+        function: parse_block_signal_params
+        type: 
+        - char *
+        - unknown
+    - 'IGNORE_SIGNAL_OPTION':
+        function: parse_signal_action_params
+        type: 
+        - char *
+        - unknown
+    - 'BLOCK_SIGNAL_OPTION':
+        function: parse_block_signal_params
+        type: 
+        - char *
+        - unknown
+    - 'S':
+        function: parse_split_string
+        type: 
+        - raw
+        - unknown
+expand:
+    - 't':
+        function: parse_tab_stops
+        type: unknown
+fmt:
+    - 'p':
+        function: set_prefix
+        type: char *
+fold:
+    - '0,1,2,3,4,5,6,7,8,9,w':
+        function: xnumtoumax
+        type: unsigned long
+head:
+    - 'c':
+        function: string_to_integer
+        type: unsigned long
+    - 'n':
+        function: string_to_integer
+        type: unsigned long
+install:
+    - 'STRIP_PROGRAM_OPTION':
+        function: xstrdup
+        type: char *
+join:
+    - 'v,a':
+        function: quote
+        type: char *
+    - 'v,a':
+        function: quote
+        type: char *
+    - 'e':
+        function: strcmp
+        type: char *
+    - 'o':
+        function: strcmp
+        type: char *
+    - 'o':
+        function: add_field_list
+        type: unknown
+    - 't':
+        function: strcmp
+        type: char *
+    - 't':
+        function: quote
+        type: char *
+    - 't':
+        function: quote
+        type: char *
+    - '(ascii number)1':
+        function: add_file_name
+        type: 
+        - 
+        - 
+        - char *
+        - unknown
+        - unknown
+        - unknown
+kill:
+    - '0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,n,s':
+        function: quote
+        type: char *
+    - '0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,n,s':
+        function: quote
+        type: char *
+    - '0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F,G,H,I,J,K,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,n,s':
+        function: operand2sig
+        type: unknown
+ls:
+    - 'w':
+        function: decode_line_length
+        type: 
+        - unknown
+        - unsigned long
+    - 'w':
+        function: quote
+        type: char *
+    - 'w':
+        function: quote
+        type: char *
+    - 'F':
+        function: XARGMATCH
+        type: unknown
+    - 'I':
+        function: add_ignore_pattern
+        type: unknown
+    - 'T':
+        function: xnumtoumax
+        type: unsigned long
+    - 'SORT_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'TIME_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'FORMAT_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'COLOR_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'HYPERLINK_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'INDICATOR_STYLE_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'BLOCK_SIZE_OPTION':
+        function: xstrtol_fatal
+        type: long
+mv:
+    - 'u':
+        function: XARGMATCH
+        type: unknown
+nl:
+    - 'p':
+        function: re_compile_pattern
+        type: unknown
+    - 'p':
+        function: strlen
+        type: char *
+    - 'h':
+        function: quote
+        type: char *
+    - 'h':
+        function: quote
+        type: char *
+    - 'b':
+        function: quote
+        type: char *
+    - 'b':
+        function: quote
+        type: char *
+    - 'f':
+        function: quote
+        type: char *
+    - 'f':
+        function: quote
+        type: char *
+    - 'v':
+        function: xdectoimax
+        type: unknown
+    - 'i':
+        function: xdectoimax
+        type: unknown
+    - 'l':
+        function: xnumtoimax
+        type: unknown
+    - 'w':
+        function: xnumtoimax
+        type: unknown
+    - 'n':
+        function: strcmp
+        type: char *
+    - 'n':
+        function: strcmp
+        type: char *
+    - 'n':
+        function: strcmp
+        type: char *
+    - 'n':
+        function: quote
+        type: char *
+    - 'n':
+        function: quote
+        type: char *
+    - 'd':
+        function: strlen
+        type: char *
+nproc:
+    - 'IGNORE_OPTION':
+        function: xnumtoumax
+        type: unsigned long
+numfmt:
+    - 'FROM_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'FROM_UNIT_OPTION':
+        function: unit_to_umax
+        type: 
+        - char *
+        - raw
+        - unknown
+    - 'TO_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'TO_UNIT_OPTION':
+        function: unit_to_umax
+        type: 
+        - char *
+        - raw
+        - unknown
+    - 'ROUND_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'PADDING_OPTION':
+        function: quote
+        type: char *
+    - 'PADDING_OPTION':
+        function: quote
+        type: char *
+    - 'FIELD_OPTION':
+        function: set_fields
+        type: unknown
+    - 'HEADER_OPTION':
+        function: quote
+        type: char *
+    - 'HEADER_OPTION':
+        function: quote
+        type: char *
+    - 'INVALID_OPTION':
+        function: XARGMATCH
+        type: unknown
+pr:
+    - 'PAGES_OPTION':
+        function: first_last_page
+        type: unknown
+    - 'PAGES_OPTION':
+        function: quote
+        type: char *
+    - 'PAGES_OPTION':
+        function: quote
+        type: char *
+    - 'COLUMNS_OPTION':
+        function: parse_column_count
+        type: unknown
+    - 'e':
+        function: getoptarg
+        type: 
+        - 
+        - 
+        - char *
+        - unknown
+        - unknown
+        - char *
+        - unknown
+    - 'i':
+        function: getoptarg
+        type: 
+        - 
+        - 
+        - char *
+        - unknown
+        - unknown
+        - char *
+        - unknown
+    - 'l':
+        function: getoptnum
+        type: unknown
+    - 'n':
+        function: getoptarg
+        type: 
+        - 
+        - 
+        - char *
+        - unknown
+        - unknown
+        - char *
+        - unknown
+    - 'N':
+        function: getoptnum
+        type: unknown
+    - 'o':
+        function: getoptnum
+        type: unknown
+    - 's':
+        function: separator_string
+        type: 
+        - char *
+        - unknown
+    - 'S':
+        function: separator_string
+        type: 
+        - char *
+        - unknown
+    - 'w':
+        function: getoptnum
+        type: unknown
+    - 'W':
+        function: getoptnum
+        type: unknown
+ptx:
+    - 'g':
+        function: quote
+        type: char *
+    - 'g':
+        function: quote
+        type: char *
+    - 'w':
+        function: quote
+        type: char *
+    - 'w':
+        function: quote
+        type: char *
+    - 'F':
+        function: unescape_string
+        type: unknown
+    - 'S':
+        function: unescape_string
+        type: unknown
+    - 'W':
+        function: unescape_string
+        type: unknown
+    - '(ascii number)10':
+        function: XARGMATCH
+        type: unknown
+rm:
+    - 'INTERACTIVE_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'PRESERVE_ROOT':
+        function: strcmp
+        type: char *
+shred:
+    - 'n':
+        function: xdectoumax
+        type: unknown
+    - 'RANDOM_SOURCE_OPTION':
+        function: strcmp
+        type: char *
+    - 'u':
+        function: XARGMATCH
+        type: unknown
+    - 's':
+        function: xnumtoumax
+        type: unsigned long
+shuf:
+    - 'n':
+        function: quote
+        type: char *
+    - 'n':
+        function: quote
+        type: char *
+    - 'o':
+        function: strcmp
+        type: char *
+    - 'RANDOM_SOURCE_OPTION':
+        function: strcmp
+        type: char *
+sort:
+    - 'SORT_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'CHECK_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'COMPRESS_PROGRAM_OPTION':
+        function: strcmp
+        type: char *
+    - 'k':
+        function: parse_field_count
+        type: 
+        - unknown
+        - unsigned long
+    - 'k':
+        function: badfieldspec
+        type: unknown
+    - 'k':
+        function: badfieldspec
+        type: unknown
+    - 'k':
+        function: badfieldspec
+        type: unknown
+    - 'k':
+        function: badfieldspec
+        type: unknown
+    - 'NMERGE_OPTION':
+        function: specify_nmerge
+        type: 
+        - long
+        - unknown
+    - 'o':
+        function: strcmp
+        type: char *
+    - 'RANDOM_SOURCE_OPTION':
+        function: strcmp
+        type: char *
+    - 'S':
+        function: specify_sort_size
+        type: 
+        - long
+        - unknown
+    - 't':
+        function: strcmp
+        type: char *
+    - 't':
+        function: quote
+        type: char *
+    - 't':
+        function: quote
+        type: char *
+    - 'T':
+        function: add_temp_dir
+        type: unknown
+    - 'PARALLEL_OPTION':
+        function: specify_nthreads
+        type: 
+        - long
+        - unknown
+split:
+    - 'ADDITIONAL_SUFFIX_OPTION':
+        function: strlen
+        type: char *
+    - 'ADDITIONAL_SUFFIX_OPTION':
+        function: last_component
+        type: unknown
+    - 'ADDITIONAL_SUFFIX_OPTION':
+        function: quote
+        type: char *
+    - 'ADDITIONAL_SUFFIX_OPTION':
+        function: quote
+        type: char *
+    - 'b':
+        function: parse_n_units
+        type: unknown
+    - 'l':
+        function: parse_n_units
+        type: unknown
+    - 'C':
+        function: parse_n_units
+        type: unknown
+    - 'n':
+        function: strncmp
+        type: unknown
+    - 'n':
+        function: strncmp
+        type: unknown
+    - 'n':
+        function: parse_chunk
+        type: unknown
+    - 't':
+        function: strcmp
+        type: char *
+    - 't':
+        function: quote
+        type: char *
+    - 't':
+        function: quote
+        type: char *
+    - 'd,x':
+        function: strlen
+        type: char *
+    - 'd,x':
+        function: strspn
+        type: unknown
+    - 'd,x':
+        function: quote
+        type: char *
+    - 'd,x':
+        function: quote
+        type: char *
+stdbuf:
+    - 'e,i,o':
+        function: strcmp
+        type: char *
+    - 'e,i,o':
+        function: parse_size
+        type: unknown
+    - 'e,i,o':
+        function: quote
+        type: char *
+    - 'e,i,o':
+        function: quote
+        type: char *
+tail:
+    - 'c,n':
+        function: xnumtoumax
+        type: unsigned long
+    - 'f,LONG_FOLLOW_OPTION':
+        function: XARGMATCH
+        type: unknown
+    - 'MAX_UNCHANGED_STATS_OPTION':
+        function: xnumtoumax
+        type: unsigned long
+    - 'PID_OPTION':
+        function: xdectoumax
+        type: unknown
+    - 's':
+        function: xstrtod
+        type: double
+    - 's':
+        function: quote
+        type: char *
+    - 's':
+        function: quote
+        type: char *
+tee:
+    - 'p':
+        function: XARGMATCH
+        type: unknown
+timeout:
+    - 'k':
+        function: parse_duration
+        type: 
+        - 
+        - 
+        - char *
+        - unknown
+        - unknown
+        - double
+        - unknown
+    - 's':
+        function: operand2sig
+        type: unknown
+touch:
+    - 't':
+        function: quote
+        type: char *
+    - 't':
+        function: quote
+        type: char *
+    - 'TIME_OPTION':
+        function: XARGMATCH
+        type: unknown
+unexpand:
+    - 't':
+        function: parse_tab_stops
+        type: unknown
+uniq:
+    - '(ascii number)1':
+        function: quote
+        type: char *
+    - '(ascii number)1':
+        function: quote
+        type: char *
+    - 'D':
+        function: XARGMATCH
+        type: unknown
+    - 'GROUP_OPTION':
+        function: XARGMATCH
+        type: unknown
+wc:
+    - 'TOTAL_OPTION':
+        function: XARGMATCH
+        type: unknown
